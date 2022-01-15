@@ -1,5 +1,6 @@
 use std::fmt::Display;
 
+#[derive(PartialEq, Eq, Debug)]
 pub enum FizzBuzz {
     FizzBuzz,
     Fizz,
@@ -26,5 +27,50 @@ impl From<u32> for FizzBuzz {
             (_, 0) => FizzBuzz::Buzz,
             _ => FizzBuzz::Number { x: i },
         }
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn from_1_number() {
+        assert_eq!(FizzBuzz::Number { x: 1 }, FizzBuzz::from(1))
+    }
+
+    #[test]
+    fn from_3_number() {
+        assert_eq!(FizzBuzz::Fizz, FizzBuzz::from(3))
+    }
+
+    #[test]
+    fn from_5_number() {
+        assert_eq!(FizzBuzz::Buzz, FizzBuzz::from(5))
+    }
+
+    #[test]
+    fn from_15_number() {
+        assert_eq!(FizzBuzz::FizzBuzz, FizzBuzz::from(15))
+    }
+
+    #[test]
+    fn display_1_number() {
+        assert_eq!("1", FizzBuzz::Number { x: 1 }.to_string())
+    }
+
+    #[test]
+    fn display_3_number() {
+        assert_eq!("Fizz", FizzBuzz::Fizz.to_string())
+    }
+
+    #[test]
+    fn display_5_number() {
+        assert_eq!("Buzz", FizzBuzz::Buzz.to_string())
+    }
+
+    #[test]
+    fn display_15_number() {
+        assert_eq!("FizzBuzz", FizzBuzz::FizzBuzz.to_string())
     }
 }
