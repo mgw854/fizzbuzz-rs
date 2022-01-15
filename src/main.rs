@@ -1,9 +1,18 @@
 mod game;
 
 use game::fizzbuzz::FizzBuzz;
+use tokio::signal;
 
-fn main() {
-    for y in (1 as u32..=100).into_iter().map(|x| FizzBuzz::from(x)) {
-        println!("{}", y);
+#[tokio::main]
+async fn main() {
+    let handle = tokio::spawn(async { fizzbuzz_rs::run().await });
+
+    match signal::ctrl_c().await {
+        Ok(()) => {}
+        Err(err) => {
+            eprintln!("Unable to listen for shutdown signal: {}", err);
+        }
     }
+
+    handle.abort();
 }
