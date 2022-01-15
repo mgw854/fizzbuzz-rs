@@ -1,10 +1,6 @@
 fn main() {
-    let mut i = 1;
-
-    while i <= 100 {
+    for i in 1..=100 {
         println!("{}", fizzbuzz(i));
-
-        i += 1;
     }
 }
 
