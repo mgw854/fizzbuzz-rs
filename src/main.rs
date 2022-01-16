@@ -1,6 +1,5 @@
 mod game;
 
-use game::fizzbuzz::FizzBuzz;
 use tokio::signal;
 
 #[tokio::main]
